@@ -1,0 +1,22 @@
+{
+  "pragmatic_play": {
+    "jam_gacor": ["03:20 - 05:00 WIB", "12:15 - 14:00 WIB", "21:00 - 23:45 WIB"],
+    "games": [
+      { "id": 1, "name": "Gates of Olympus", "rtp": 94, "image": "assets/img/olympus.png", "pola": "10x Manual Cepat → 30x Turbo (DC On) → 20x Auto (DC Off)" },
+      { "id": 2, "name": "Sweet Bonanza", "rtp": 93, "image": "assets/img/bonanza.png", "pola": "20x Manual Normal → 50x Turbo (DC Off) → 10x Spasi Cepat" },
+      { "id": 3, "name": "Starlight Princess", "rtp": 91, "image": "assets/img/starlight.png", "pola": "15x Auto Normal → 40x Turbo (DC On) → 20x Cepat (DC Off)" },
+      { "id": 4, "name": "Sugar Rush 1000", "rtp": 89, "image": "assets/img/sugar.png", "pola": "30x Turbo (DC On) → 30x Cepat (DC Off) → Naik Bet 2x" },
+      { "id": 5, "name": "Wild West Gold", "rtp": 88, "image": "assets/img/wildwest.png", "pola": "10x Manual → 20x Turbo (DC Off) → 50x Cepat (DC On)" }
+    ]
+  },
+  "pg_soft": {
+    "jam_gacor": ["09:00 - 11:30 WIB", "15:30 - 17:45 WIB", "23:00 - 02:00 WIB"],
+    "games": [
+      { "id": 1, "name": "Mahjong Ways 2", "rtp": 94, "image": "assets/img/mahjong2.png", "pola": "10x Manual (No Turbo) → 30x Auto Turbo → 50x Auto Normal" },
+      { "id": 2, "name": "Wild Bandito", "rtp": 92, "image": "assets/img/bandito.png", "pola": "20x Auto Normal → 20x Auto Turbo → Naik Turun Nominal Bet" },
+      { "id": 3, "name": "Lucky Neko", "rtp": 90, "image": "assets/img/neko.png", "pola": "10x Manual → 30x Auto Turbo → 10x Spasi Manual" },
+      { "id": 4, "name": "Treasures of Aztec", "rtp": 87, "image": "assets/img/aztec.png", "pola": "50x Auto Turbo → 20x Manual Normal → Fokus Perkalian Atas" },
+      { "id": 5, "name": "Leprechaun Riches", "rtp": 86, "image": "assets/img/lepre.png", "pola": "30x Auto Normal → 30x Auto Turbo → Istirahat 1 Menit" }
+    ]
+  }
+}
