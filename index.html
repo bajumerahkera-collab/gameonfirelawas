@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Info Jam Gacor & Pola</title>
+    <title>Live AI Info Jam Gacor & Pola Otomatis</title>
     <style>
         :root {
             --bg-main: #0b0f19;
@@ -37,6 +37,7 @@
             border-radius: 12px;
             text-align: center;
             margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
 
         header h1 {
@@ -86,6 +87,7 @@
             border-radius: 8px;
             overflow: hidden;
             margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
 
         .grid-table th {
@@ -103,6 +105,21 @@
             vertical-align: middle;
         }
 
+        .game-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .game-info img {
+            width: 55px;
+            height: 55px;
+            border-radius: 8px;
+            object-fit: cover;
+            background-color: var(--bg-inner);
+            border: 2px solid #374151;
+        }
+
         .game-name {
             font-weight: 600;
             font-size: 1rem;
@@ -116,13 +133,14 @@
             height: 20px;
             position: relative;
             overflow: hidden;
+            border: 1px solid #4b5563;
         }
 
         .bar-fill {
             height: 100%;
             border-radius: 20px;
             width: 0%;
-            transition: width 1s ease-in-out;
+            transition: width 1s ease-in-out, background-color 0.5s ease;
             display: flex;
             align-items: center;
             justify-content: flex-end;
@@ -159,29 +177,43 @@
             border-radius: 4px;
             cursor: pointer;
             font-weight: 600;
+            transition: background 0.2s;
         }
 
+        .btn-copy:hover { background-color: #4338ca; }
         .btn-copy.copied { background-color: var(--success); }
 
         .section-title {
             font-size: 1.5rem;
             margin: 35px 0 15px 0;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .pragmatic-title { color: var(--accent-pragmatic); }
         .pgsoft-title { color: var(--accent-pgsoft); }
+
+        @media (max-width: 768px) {
+            .grid-table th, .grid-table td { padding: 10px; }
+            .grid-table tr { display: block; margin-bottom: 15px; border: 1px solid var(--bg-inner); border-radius: 8px; }
+            .grid-table td { display: block; width: 100%; box-sizing: border-box; text-align: right; border-bottom: 1px dashed var(--bg-inner); }
+            .grid-table td::before { content: attr(data-label); float: left; font-weight: bold; color: var(--text-muted); }
+            .grid-table td:last-child { border-bottom: none; }
+            .game-info { justify-content: flex-end; }
+            .pola-wrapper { align-items: flex-end; }
+            .btn-copy { align-self: flex-end; }
+            th { display: none; }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <div class="live-badge">● LIVE AUTO-UPDATE</div>
+        <div class="live-badge">● LIVE AUTO-ROTATION AGORITHM</div>
         <h1>Sistem Pola & Jam Gacor Harian</h1>
-        <p>Data diperbarui otomatis setiap hari berdasarkan kalender server</p>
+        <p>Game on fire berganti & diacak otomatis setiap hari agar tidak bosan</p>
     </header>
 
-    <!-- PRAGMATIC -->
     <div class="section-title pragmatic-title">🎰 PRAGMATIC PLAY</div>
     <div class="time-banner">
         <span>⏱️ Jam Gacor Hari Ini:</span> <span id="jam-pragmatic" style="color: #fff;">Memuat...</span>
@@ -189,15 +221,14 @@
     <table class="grid-table">
         <thead>
             <tr>
-                <th style="width: 30%;">Game On Fire</th>
+                <th style="width: 35%;">Game On Fire Hari Ini</th>
                 <th style="width: 25%;">Live RTP harian</th>
-                <th style="width: 45%;">Pola Otomatis Hari Ini</th>
+                <th style="width: 40%;">Rekomendasi Pola</th>
             </tr>
         </thead>
         <tbody id="pragmatic-list"></tbody>
     </table>
 
-    <!-- PG SOFT -->
     <div class="section-title pgsoft-title">📱 PG SOFT</div>
     <div class="time-banner">
         <span>⏱️ Jam Gacor Hari Ini:</span> <span id="jam-pgsoft" style="color: #fff;">Memuat...</span>
@@ -205,9 +236,9 @@
     <table class="grid-table">
         <thead>
             <tr>
-                <th style="width: 30%;">Game On Fire</th>
+                <th style="width: 35%;">Game On Fire Hari Ini</th>
                 <th style="width: 25%;">Live RTP harian</th>
-                <th style="width: 45%;">Pola Otomatis Hari Ini</th>
+                <th style="width: 40%;">Rekomendasi Pola</th>
             </tr>
         </thead>
         <tbody id="pgsoft-list"></tbody>
@@ -215,16 +246,50 @@
 </div>
 
 <script>
-    // 1. Data Dasar Game
-    const pragmaticGames = ["Gates of Olympus", "Sweet Bonanza", "Starlight Princess", "Sugar Rush 1000", "Wild West Gold"];
-    const pgGames = ["Mahjong Ways 2", "Wild Bandito", "Lucky Neko", "Treasures of Aztec", "Leprechaun Riches"];
+    // 1. Kumpulan Database Game (Total 16 Game untuk Rotasi Acak)
+    // Silakan ganti bagian 'assets/img/nama_file.png' sesuai dengan lokasi gambar di hostinganmu.
+    const pragmaticPool = [
+        { name: "Gates of Olympus", img: "https://img.viva88athenae.com/pp/images/vs20olympgate.png" },
+        { name: "Sweet Bonanza", img: "https://img.viva88athenae.com/pp/images/vs20fruitsw-t.png" },
+        { name: "Starlight Princess", img: "https://img.viva88athenae.com/pp/images/vs20starlight.png" },
+        { name: "Sugar Rush 1000", img: "https://img.viva88athenae.com/pp/images/vs20sugarrushx.png" },
+        { name: "Wild West Gold", img: "https://img.viva88athenae.com/pp/images/vs40wildwest-t.png" },
+        { name: "Pyramid Bonanza", img: "https://img.viva88athenae.com/pp/images/vs20pbonanza.png" },
+        { name: "Gates of Gatot Kaca", img: "https://img.viva88athenae.com/pp/images/vs20gatotgates.png" },
+        { name: "5 Lions Megaways", img: "https://img.viva88athenae.com/pp/images/vswayslions.png" }
+        { name: "Candy Rush", img: "https://img.viva88athenae.com/pp/images/vs20candyia.png" }
+        { name: "Jelly Express", img: "https://img.viva88athenae.com/pp/images/vs20payanyvol.png" }
+        { name: "Sweet Bonanza 2500", img: "https://img.viva88athenae.com/pp/images/vs20swbon2500.png" }
+        { name: "Gates Of Olympus Super Scatter", img: "https://img.viva88athenae.com/pp/images/vs20olympgold.png" }
+        { name: "Mahjong Wins 3 - Black Scatter", img: "https://img.viva88athenae.com/pp/images/vswaysmahwblck.png" }
+        { name: "Sweet Bonanza 1000", img: "https://img.viva88athenae.com/pp/images/vs20fruitswx.png" }
+        { name: "Fortune of Olympus", img: "https://img.viva88athenae.com/pp/images/vs20olympgcl.png" }
+        { name: "Gates Of Gatot Kaca Super Scatter", img: "https://img.viva88athenae.com/pp/images/vs20olgatssc.png" }
+        { name: "Sweet Bonanza Super Scatter", img: "https://img.viva88athenae.com/pp/images/vs20swbonsup.png" }
+        { name: "Sugar Rush Super Scatter", img: "https://img.viva88athenae.com/pp/images/vs20sugrushss.png" }
+    
+    
+    
+    ];
 
-    // 2. Kumpulan komponen pola dasar agar bisa diacak otomatis setiap hari
+    const pgPool = [
+        { name: "Mahjong Ways 2", img: "https://img.viva88athenae.com/pg/images/mahjong-ways2.png" },
+        { name: "Wild Bandito", img: "https://img.viva88athenae.com/pg/images/wild-bandito.png" },
+        { name: "Lucky Neko", img: "https://img.viva88athenae.com/pg/images/lucky-neko.png" },
+        { name: "Treasures of Aztec", img: "https://img.viva88athenae.com/pg/images/treasures-aztec.png" },
+        { name: "Leprechaun Riches", img: "assets/img/leprechaun.png" },
+        { name: "Caishen Wins", img: "https://img.viva88athenae.com/pg/images/cai-shen-wins.png" },
+        { name: "Ganesha Fortune", img: "https://img.viva88athenae.com/pg/images/ganesha-fortune.png" },
+        { name: "Dreams of Macau", img: "https://img.viva88athenae.com/pg/images/dreams-of-macau.png" }
+        { name: "Wild Bounty Showdown", img: "https://img.viva88athenae.com/pg/images/wild-bounty-showdown.png" }
+        { name: "Mahjong Ways 1", img: "https://img.viva88athenae.com/pg/images/mahjong-ways.png" }
+    ];
+
+    // Komponen Putaran/Spin untuk Kombinasi Pola Otomatis
     const pragmaticSpins = ["10x Manual Cepat", "20x Manual Normal", "30x Turbo (DC On)", "40x Turbo (DC Off)", "15x Auto Cepat", "50x Turbo (DC On)", "25x Fast Spin"];
     const pgSpins = ["10x Manual (No Turbo)", "20x Auto Normal", "30x Auto Turbo", "15x Spasi Manual", "50x Auto Turbo", "40x Manual Mix"];
 
-    // Generator Angka Acak Konsisten Berdasarkan Hari (Seed Random)
-    // Ini membuat angka acak hari ini AKAN TETAP SAMA dari pagi sampai malam, tapi BEGANTI saat besok.
+    // Fungsi Matematika Pengunci Acak Harian (Seed Random)
     function getSeedBasedRandom(seed) {
         const x = Math.sin(seed) * 10000;
         return x - Math.floor(x);
@@ -232,24 +297,22 @@
 
     function generateDailyData() {
         const today = new Date();
-        // Gabungan hari + bulan + tahun sebagai kode pengunci acak harian
         const daySeed = today.getDate() + (today.getMonth() * 31) + today.getFullYear();
 
-        // 1. Generate Jam Gacor Otomatis Hari Ini
+        // 1. Acak Jam Gacor Otomatis Hari Ini
         const pragJam1 = Math.floor(8 + getSeedBasedRandom(daySeed) * 4);
         const pragJam2 = Math.floor(19 + getSeedBasedRandom(daySeed + 1) * 4);
-        document.getElementById('jam-pragmatic').textContent = `03:15-05:00 WIB | ${pragJam1}:20-14:45 WIB | ${pragJam2}:00-23:50 WIB`;
+        document.getElementById('jam-pragmatic').textContent = `03:20-05:00 WIB | ${pragJam1}:15-14:30 WIB | ${pragJam2}:00-23:45 WIB`;
 
         const pgJam1 = Math.floor(9 + getSeedBasedRandom(daySeed + 2) * 3);
-        const pgJam2 = Math.floor(22 + getSeedBasedRandom(daySeed + 3) * 2);
-        document.getElementById('jam-pgsoft').textContent = `01:00-03:00 WIB | ${pgJam1}:15-12:00 WIB | ${pgJam2}:30-01:45 WIB`;
+        const pgJam2 = Math.floor(21 + getSeedBasedRandom(daySeed + 3) * 3);
+        document.getElementById('jam-pgsoft').textContent = `02:00-04:30 WIB | ${pgJam1}:00-11:45 WIB | ${pgJam2}:15-01:00 WIB`;
 
-        // 2. Render List Game Pragmatic
-        renderAutoList("pragmatic-list", pragmaticGames, pragmaticSpins, daySeed, true);
-        // 3. Render List Game PG Soft
-        renderAutoList("pgsoft-list", pgGames, pgSpins, daySeed + 50, false);
+        // 2. Tampilkan 5 Game Acak untuk Masing-Masing Provider
+        renderAutoList("pragmatic-list", pragmaticPool, pragmaticSpins, daySeed, true);
+        renderAutoList("pgsoft-list", pgPool, pgSpins, daySeed + 100, false);
 
-        // Jalankan animasi bar
+        // Memicu efek transisi bar memanjang halus
         setTimeout(() => {
             document.querySelectorAll(".bar-fill").forEach(bar => {
                 bar.style.width = bar.getAttribute("data-target") + "%";
@@ -257,35 +320,42 @@
         }, 200);
     }
 
-    function renderAutoList(elementId, games, spinPool, baseSeed, isPragmatic) {
+    function renderAutoList(elementId, gamePool, spinPool, baseSeed, isPragmatic) {
         const container = document.getElementById(elementId);
         container.innerHTML = "";
 
-        // Mengacak urutan game harian (Game on Fire berotasi secara otomatis)
-        let gameList = [...games].sort(() => getSeedBasedRandom(baseSeed) - 0.5);
+        // Mengacak seluruh database game menggunakan Seed harian agar urutannya berubah tiap hari
+        let shuffledGames = [...gamePool].sort(() => getSeedBasedRandom(baseSeed) - 0.5);
+        
+        // Ambil hanya 5 game teratas hasil acakan hari ini
+        let dailyFiveGames = shuffledGames.slice(0, 5);
 
-        gameList.forEach((gameName, index) => {
+        dailyFiveGames.forEach((game, index) => {
             const seed = baseSeed + index;
             
-            // Mengunci nilai RTP harian otomatis MAKSIMAL 94% (Selalu under 95%)
-            // Rumus menghasilkan rentang 85% sampai 94%
+            // Kunci nilai RTP harian otomatis MAKSIMAL 94% (Selalu di bawah 95%)
             const dailyRtp = Math.floor(85 + (getSeedBasedRandom(seed) * 10)); 
 
             // Membuat kombinasi pola otomatis baru setiap hari
-            const step1 = spinPool[Math.floor(getSeedBasedRandom(seed + 1) * spinPool.length)];
-            const step2 = spinPool[Math.floor(getSeedBasedRandom(seed + 2) * spinPool.length)];
+            const step1 = spinPool[Math.floor(getSeedBasedRandom(seed + 5) * spinPool.length)];
+            const step2 = spinPool[Math.floor(getSeedBasedRandom(seed + 10) * spinPool.length)];
             const suffix = isPragmatic ? " → Incar Buy Spin" : " → Mainkan Bet Naik-Turun";
             const fullPola = `${step1} → ${step2}${suffix}`;
 
             const row = document.createElement("tr");
             row.innerHTML = `
-                <td><div class="game-name">${gameName}</div></td>
-                <td>
+                <td data-label="Game On Fire Hari Ini">
+                    <div class="game-info">
+                        <img src="${game.img}" alt="${game.name}" onerror="this.src='https://placehold.co/55x55/1f2937/ffffff?text=SLOT'">
+                        <div class="game-name">${game.name}</div>
+                    </div>
+                </td>
+                <td data-label="Live RTP harian">
                     <div class="bar-container">
                         <div class="bar-fill" data-target="${dailyRtp}">${dailyRtp}%</div>
                     </div>
                 </td>
-                <td>
+                <td data-label="Rekomendasi Pola">
                     <div class="pola-wrapper">
                         <div class="pola-text">${fullPola}</div>
                         <button class="btn-copy" onclick="copyPattern(this, '${fullPola}')">Salin Pola</button>
@@ -307,9 +377,7 @@
         });
     }
 
-    // Jalankan sistem saat web dibuka
     window.addEventListener("DOMContentLoaded", generateDailyData);
 </script>
-
 </body>
 </html>
