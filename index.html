@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Info Jam Gacor & Pola Terupdate</title>
+    <style>
+        :root {
+            --bg-main: #0b0f19;
+            --bg-card: #111827;
+            --bg-inner: #1f2937;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-pragmatic: #f59e0b;
+            --accent-pgsoft: #06b6d4;
+            --success: #10b981;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%);
+            border: 1px solid #4c1d95;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        header h1 {
+            margin: 0 0 10px 0;
+            color: var(--accent-pragmatic);
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
+        }
+
+        header p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .alert-box {
+            background-color: #1e293b;
+            border-left: 4px solid #ef4444;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin: 35px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 3px solid var(--bg-inner);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pragmatic-title { color: var(--accent-pragmatic); border-bottom-color: var(--accent-pragmatic); }
+        .pgsoft-title { color: var(--accent-pgsoft); border-bottom-color: var(--accent-pgsoft); }
+
+        .time-banner {
+            background-color: var(--bg-card);
+            border: 1px solid var(--bg-inner);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .time-banner span {
+            color: var(--text-muted);
+            font-weight: bold;
+        }
+
+        .grid-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .grid-table th {
+            background-color: var(--bg-inner);
+            padding: 14px;
+            text-align: left;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        .grid-table td {
+            padding: 16px 14px;
+            border-bottom: 1px solid var(--bg-inner);
+            vertical-align: middle;
+        }
+
+        .game-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .game-info img {
+            width: 55px;
+            height: 55px;
+            border-radius: 8px;
+            object-fit: cover;
+            background-color: var(--bg-inner);
+            border: 1px solid #374151;
+        }
+
+        .game-name {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        /* Real-Time Progress Bar */
+        .bar-container {
+            width: 100%;
+            background-color: #374151;
+            border-radius: 20px;
+            height: 20px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #4b5563;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 20px;
+            width: 0%;
+            transition: width 0.5s ease-in-out, background-color 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: #000;
+            font-weight: 800;
+            font-size: 0.8rem;
+            background: linear-gradient(90deg, #3b82f6, var(--success));
+        }
+
+        /* Pola Box */
+        .pola-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .pola-text {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--bg-main);
+            padding: 8px 12px;
+            border-radius: 6px;
+            color: #a7f3d0;
+            font-size: 0.9rem;
+            border: 1px solid var(--bg-inner);
+            word-break: break-all;
+        }
+
+        .btn-copy {
+            align-self: flex-start;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .btn-copy:hover { background-color: #4338ca; }
+        .btn-copy.copied { background-color: var(--success); }
+
+        @media (max-width: 768px) {
+            .grid-table th, .grid-table td { padding: 10px; }
+            .grid-table tr { display: block; margin-bottom: 15px; border: 1px solid var(--bg-inner); border-radius: 8px; }
+            .grid-table td { display: block; width: 100%; box-sizing: border-box; text-align: right; border-bottom: 1px dashed var(--bg-inner); }
+            .grid-table td::before { content: attr(data-label); float: left; font-weight: bold; color: var(--text-muted); }
+            .grid-table td:last-child { border-bottom: none; }
+            .game-info { justify-content: flex-end; }
+            .pola-wrapper { align-items: flex-end; }
+            .btn-copy { align-self: flex-end; }
+            th { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>⚡ Hub Game On Fire & Jam Gacor ⚡</h1>
+        <p>Analisis Akurasi Pola & Perubahan Algoritma Real-Time</p>
+    </header>
+
+    <div class="alert-box">
+        <strong>PEMBERITAHUAN:</strong> Pola mekanis <strong>PRAGMATIC PLAY</strong> berfokus pada kestabilan fitur pelipat ganda (Multiplier/Buy Spin). Sedangkan <strong>PG SOFT</strong> murni menggunakan kalkulasi runtuhan pecahan berantai secara presisi. Pola di bawah ini tidak boleh saling tertukar!
+    </div>
+
+    <div class="section-title pragmatic-title">🎰 PRAGMATIC PLAY</div>
+    <div class="time-banner">
+        <span>⏱️ Jam Gacor Hari Ini:</span> 03:20-05:00 WIB | 12:15-14:00 WIB | 21:00-23:45 WIB
+    </div>
+    <table class="grid-table">
+        <thead>
+            <tr>
+                <th style="width: 30%;">Game On Fire</th>
+                <th style="width: 25%;">Live Bar Winrate</th>
+                <th style="width: 45%;">Rekomendasi Pola</th>
+            </tr>
+        </thead>
+        <tbody id="pragmatic-list">
+            </tbody>
+    </table>
+
+    <div class="section-title pgsoft-title">📱 PG SOFT (Pocket Games)</div>
+    <div class="time-banner">
+        <span>⏱️ Jam Gacor Hari Ini:</span> 09:00-11:30 WIB | 15:30-17:45 WIB | 23:00-02:00 WIB
+    </div>
+    <table class="grid-table">
+        <thead>
+            <tr>
+                <th style="width: 30%;">Game On Fire</th>
+                <th style="width: 25%;">Live Bar Winrate</th>
+                <th style="width: 45%;">Rekomendasi Pola</th>
+            </tr>
+        </thead>
+        <tbody id="pgsoft-list">
+            </tbody>
+    </table>
+</div>
+
+<script>
+    // Penampung data mentah tiruan sesuai format JSON yang diminta
+    const dataGacor = {
+        "pragmatic_play": [
+            { "name": "Gates of Olympus", "rtp": 94, "image": "https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=100", "pola": "10x Manual Cepat → 30x Turbo (DC On) → 20x Auto (DC Off)" },
+            { "name": "Sweet Bonanza", "rtp": 93, "image": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=100", "pola": "20x Manual Normal → 50x Turbo (DC Off) → 10x Spasi Cepat" },
+            { "name": "Starlight Princess", "rtp": 91, "image": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=100", "pola": "15x Auto Normal → 40x Turbo (DC On) → 20x Cepat (DC Off)" },
+            { "name": "Sugar Rush 1000", "rtp": 89, "image": "https://images.unsplash.com/photo-1581795669633-91b77ad02334?w=100", "pola": "30x Turbo (DC On) → 30x Cepat (DC Off) → Naik Bet 2x" },
+            { "name": "Wild West Gold", "rtp": 88, "image": "https://images.unsplash.com/photo-1514539079130-25950c84af65?w=100", "pola": "10x Manual → 20x Turbo (DC Off) → 50x Cepat (DC On)" }
+        ],
+        "pg_soft": [
+            { "name": "Mahjong Ways 2", "rtp": 94, "image": "https://images.unsplash.com/photo-1595303526913-c7037797ece7?w=100", "pola": "10x Manual (No Turbo) → 30x Auto Turbo → 50x Auto Normal" },
+            { "name": "Wild Bandito", "rtp": 92, "image": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=100", "pola": "20x Auto Normal → 20x Auto Turbo → Naik Turun Nominal Bet" },
+            { "name": "Lucky Neko", "rtp": 90, "image": "https://images.unsplash.com/photo-1569437061241-a848be43cc82?w=100", "pola": "10x Manual → 30x Auto Turbo → 10x Spasi Manual" },
+            { "name": "Treasures of Aztec", "rtp": 87, "image": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=100", "pola": "50x Auto Turbo → 20x Manual Normal → Fokus Perkalian Atas" },
+            { "name": "Leprechaun Riches", "rtp": 86, "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100", "pola": "30x Auto Normal → 30x Auto Turbo → Istirahat 1 Menit" }
+        ]
+    };
+
+    // Fungsi Render Elemen ke DOM
+    function renderGames(provider, elementId) {
+        const container = document.getElementById(elementId);
+        container.innerHTML = "";
+
+        dataGacor[provider].forEach(game => {
+            const row = document.createElement("tr");
+            
+            row.innerHTML = `
+                <td data-label="Game On Fire">
+                    <div class="game-info">
+                        <img src="${game.image}" alt="${game.name}">
+                        <div class="game-name">${game.name}</div>
+                    </div>
+                </td>
+                <td data-label="Live Bar Winrate">
+                    <div class="bar-container">
+                        <div class="bar-fill" data-target="${game.rtp}" style="width: 0%">${game.rtp}%</div>
+                    </div>
+                </td>
+                <td data-label="Rekomendasi Pola">
+                    <div class="pola-wrapper">
+                        <div class="pola-text">${game.pola}</div>
+                        <button class="btn-copy" onclick="copyPattern(this, '${game.pola}')">Salin Pola</button>
+                    </div>
+                </td>
+            `;
+            container.appendChild(row);
+        });
+    }
+
+    // Fungsi Salin Pola Cepat
+    function copyPattern(button, text) {
+        navigator.clipboard.writeText(text).then(() => {
+            button.textContent = "Tersalin!";
+            button.classList.add("copied");
+            setTimeout(() => {
+                button.textContent = "Salin Pola";
+                button.classList.remove("copied");
+            }, 1500);
+        }).catch(err => {
+            console.error('Gagal menyalin text: ', err);
+        });
+    }
+
+    // Inisialisasi awal dan Efek Real-Time Bar naik perlahan saat web dibuka
+    window.addEventListener("DOMContentLoaded", () => {
+        renderGames("pragmatic_play", "pragmatic-list");
+        renderGames("pg_soft", "pgsoft-list");
+
+        // Animasi pergerakan bar real-time pengisian awal
+        setTimeout(() => {
+            document.querySelectorAll(".bar-fill").forEach(bar => {
+                const target = bar.getAttribute("data-target");
+                bar.style.width = target + "%";
+            });
+        }, 300);
+
+        // Simulasi Real-Time Fluktuasi Bar Kecil secara berkala (tetap di bawah 95%)
+        setInterval(() => {
+            document.querySelectorAll(".bar-fill").forEach(bar => {
+                const baseTarget = parseInt(bar.getAttribute("data-target"));
+                // Fluktuasi acak antara -2% sampai +1% agar tetap di bawah batas aman (95%)
+                const change = Math.floor(Math.random() * 4) - 2; 
+                let newRtp = baseTarget + change;
+                if(newRtp >= 95) newRtp = 94; // Hard ceiling kunci di bawah 95%
+                if(newRtp < 80) newRtp = 82;
+                
+                bar.style.width = newRtp + "%";
+                bar.textContent = newRtp + "%";
+            });
+        }, 5000); // Berubah dinamis tiap 5 detik
+    });
+</script>
+</body>
+</html>
