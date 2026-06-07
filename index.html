@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live Info Jam Gacor & Pola Terupdate</title>
+    <title>Info Jam Gacor & Pola</title>
     <style>
         :root {
             --bg-main: #0b0f19;
@@ -31,13 +31,12 @@
         }
 
         header {
-            background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%);
-            border: 1px solid #4c1d95;
+            background: linear-gradient(135deg, #111827 0%, #1e1b4b 100%);
+            border: 1px solid #312e81;
             padding: 30px;
             border-radius: 12px;
             text-align: center;
             margin-bottom: 25px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
 
         header h1 {
@@ -46,38 +45,25 @@
             font-size: 2rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
         }
 
-        header p {
-            margin: 0;
-            color: var(--text-muted);
-            font-size: 1rem;
+        .live-badge {
+            background-color: #ef4444;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+            animation: pulse 1.5s infinite;
         }
 
-        .alert-box {
-            background-color: #1e293b;
-            border-left: 4px solid #ef4444;
-            padding: 15px;
-            margin-bottom: 30px;
-            border-radius: 4px;
-            font-size: 0.95rem;
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
         }
-
-        .section-title {
-            font-size: 1.5rem;
-            margin: 35px 0 15px 0;
-            padding-bottom: 8px;
-            border-bottom: 3px solid var(--bg-inner);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .pragmatic-title { color: var(--accent-pragmatic); border-bottom-color: var(--accent-pragmatic); }
-        .pgsoft-title { color: var(--accent-pgsoft); border-bottom-color: var(--accent-pgsoft); }
 
         .time-banner {
             background-color: var(--bg-card);
@@ -99,7 +85,7 @@
             background-color: var(--bg-card);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
         }
 
         .grid-table th {
@@ -117,28 +103,12 @@
             vertical-align: middle;
         }
 
-        .game-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .game-info img {
-            width: 55px;
-            height: 55px;
-            border-radius: 8px;
-            object-fit: cover;
-            background-color: var(--bg-inner);
-            border: 1px solid #374151;
-        }
-
         .game-name {
             font-weight: 600;
             font-size: 1rem;
             color: #fff;
         }
 
-        /* Real-Time Progress Bar */
         .bar-container {
             width: 100%;
             background-color: #374151;
@@ -146,14 +116,13 @@
             height: 20px;
             position: relative;
             overflow: hidden;
-            border: 1px solid #4b5563;
         }
 
         .bar-fill {
             height: 100%;
             border-radius: 20px;
             width: 0%;
-            transition: width 0.5s ease-in-out, background-color 0.5s ease;
+            transition: width 1s ease-in-out;
             display: flex;
             align-items: center;
             justify-content: flex-end;
@@ -164,7 +133,6 @@
             background: linear-gradient(90deg, #3b82f6, var(--success));
         }
 
-        /* Pola Box */
         .pola-wrapper {
             display: flex;
             flex-direction: column;
@@ -179,7 +147,6 @@
             color: #a7f3d0;
             font-size: 0.9rem;
             border: 1px solid var(--bg-inner);
-            word-break: break-all;
         }
 
         .btn-copy {
@@ -192,113 +159,136 @@
             border-radius: 4px;
             cursor: pointer;
             font-weight: 600;
-            transition: background 0.2s;
         }
 
-        .btn-copy:hover { background-color: #4338ca; }
         .btn-copy.copied { background-color: var(--success); }
 
-        @media (max-width: 768px) {
-            .grid-table th, .grid-table td { padding: 10px; }
-            .grid-table tr { display: block; margin-bottom: 15px; border: 1px solid var(--bg-inner); border-radius: 8px; }
-            .grid-table td { display: block; width: 100%; box-sizing: border-box; text-align: right; border-bottom: 1px dashed var(--bg-inner); }
-            .grid-table td::before { content: attr(data-label); float: left; font-weight: bold; color: var(--text-muted); }
-            .grid-table td:last-child { border-bottom: none; }
-            .game-info { justify-content: flex-end; }
-            .pola-wrapper { align-items: flex-end; }
-            .btn-copy { align-self: flex-end; }
-            th { display: none; }
+        .section-title {
+            font-size: 1.5rem;
+            margin: 35px 0 15px 0;
+            text-transform: uppercase;
         }
+        .pragmatic-title { color: var(--accent-pragmatic); }
+        .pgsoft-title { color: var(--accent-pgsoft); }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <h1>⚡ Hub Game On Fire & Jam Gacor ⚡</h1>
-        <p>Analisis Akurasi Pola & Perubahan Algoritma Real-Time</p>
+        <div class="live-badge">● LIVE AUTO-UPDATE</div>
+        <h1>Sistem Pola & Jam Gacor Harian</h1>
+        <p>Data diperbarui otomatis setiap hari berdasarkan kalender server</p>
     </header>
 
-    <div class="alert-box">
-        <strong>PEMBERITAHUAN:</strong> Pola mekanis <strong>PRAGMATIC PLAY</strong> berfokus pada kestabilan fitur pelipat ganda (Multiplier/Buy Spin). Sedangkan <strong>PG SOFT</strong> murni menggunakan kalkulasi runtuhan pecahan berantai secara presisi. Pola di bawah ini tidak boleh saling tertukar!
-    </div>
-
+    <!-- PRAGMATIC -->
     <div class="section-title pragmatic-title">🎰 PRAGMATIC PLAY</div>
     <div class="time-banner">
-        <span>⏱️ Jam Gacor Hari Ini:</span> 03:20-05:00 WIB | 12:15-14:00 WIB | 21:00-23:45 WIB
+        <span>⏱️ Jam Gacor Hari Ini:</span> <span id="jam-pragmatic" style="color: #fff;">Memuat...</span>
     </div>
     <table class="grid-table">
         <thead>
             <tr>
                 <th style="width: 30%;">Game On Fire</th>
-                <th style="width: 25%;">Live Bar Winrate</th>
-                <th style="width: 45%;">Rekomendasi Pola</th>
+                <th style="width: 25%;">Live RTP harian</th>
+                <th style="width: 45%;">Pola Otomatis Hari Ini</th>
             </tr>
         </thead>
-        <tbody id="pragmatic-list">
-            </tbody>
+        <tbody id="pragmatic-list"></tbody>
     </table>
 
-    <div class="section-title pgsoft-title">📱 PG SOFT (Pocket Games)</div>
+    <!-- PG SOFT -->
+    <div class="section-title pgsoft-title">📱 PG SOFT</div>
     <div class="time-banner">
-        <span>⏱️ Jam Gacor Hari Ini:</span> 09:00-11:30 WIB | 15:30-17:45 WIB | 23:00-02:00 WIB
+        <span>⏱️ Jam Gacor Hari Ini:</span> <span id="jam-pgsoft" style="color: #fff;">Memuat...</span>
     </div>
     <table class="grid-table">
         <thead>
             <tr>
                 <th style="width: 30%;">Game On Fire</th>
-                <th style="width: 25%;">Live Bar Winrate</th>
-                <th style="width: 45%;">Rekomendasi Pola</th>
+                <th style="width: 25%;">Live RTP harian</th>
+                <th style="width: 45%;">Pola Otomatis Hari Ini</th>
             </tr>
         </thead>
-        <tbody id="pgsoft-list">
-            </tbody>
+        <tbody id="pgsoft-list"></tbody>
     </table>
 </div>
 
 <script>
-    // Penampung data mentah tiruan sesuai format JSON yang diminta
-    const dataGacor = {
-        "pragmatic_play": [
-            { "name": "Gates of Olympus", "rtp": 94, "image": "https://images.unsplash.com/photo-1606167668584-78701c57f13d?w=100", "pola": "10x Manual Cepat → 30x Turbo (DC On) → 20x Auto (DC Off)" },
-            { "name": "Sweet Bonanza", "rtp": 93, "image": "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=100", "pola": "20x Manual Normal → 50x Turbo (DC Off) → 10x Spasi Cepat" },
-            { "name": "Starlight Princess", "rtp": 91, "image": "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=100", "pola": "15x Auto Normal → 40x Turbo (DC On) → 20x Cepat (DC Off)" },
-            { "name": "Sugar Rush 1000", "rtp": 89, "image": "https://images.unsplash.com/photo-1581795669633-91b77ad02334?w=100", "pola": "30x Turbo (DC On) → 30x Cepat (DC Off) → Naik Bet 2x" },
-            { "name": "Wild West Gold", "rtp": 88, "image": "https://images.unsplash.com/photo-1514539079130-25950c84af65?w=100", "pola": "10x Manual → 20x Turbo (DC Off) → 50x Cepat (DC On)" }
-        ],
-        "pg_soft": [
-            { "name": "Mahjong Ways 2", "rtp": 94, "image": "https://images.unsplash.com/photo-1595303526913-c7037797ece7?w=100", "pola": "10x Manual (No Turbo) → 30x Auto Turbo → 50x Auto Normal" },
-            { "name": "Wild Bandito", "rtp": 92, "image": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=100", "pola": "20x Auto Normal → 20x Auto Turbo → Naik Turun Nominal Bet" },
-            { "name": "Lucky Neko", "rtp": 90, "image": "https://images.unsplash.com/photo-1569437061241-a848be43cc82?w=100", "pola": "10x Manual → 30x Auto Turbo → 10x Spasi Manual" },
-            { "name": "Treasures of Aztec", "rtp": 87, "image": "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=100", "pola": "50x Auto Turbo → 20x Manual Normal → Fokus Perkalian Atas" },
-            { "name": "Leprechaun Riches", "rtp": 86, "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100", "pola": "30x Auto Normal → 30x Auto Turbo → Istirahat 1 Menit" }
-        ]
-    };
+    // 1. Data Dasar Game
+    const pragmaticGames = ["Gates of Olympus", "Sweet Bonanza", "Starlight Princess", "Sugar Rush 1000", "Wild West Gold"];
+    const pgGames = ["Mahjong Ways 2", "Wild Bandito", "Lucky Neko", "Treasures of Aztec", "Leprechaun Riches"];
 
-    // Fungsi Render Elemen ke DOM
-    function renderGames(provider, elementId) {
+    // 2. Kumpulan komponen pola dasar agar bisa diacak otomatis setiap hari
+    const pragmaticSpins = ["10x Manual Cepat", "20x Manual Normal", "30x Turbo (DC On)", "40x Turbo (DC Off)", "15x Auto Cepat", "50x Turbo (DC On)", "25x Fast Spin"];
+    const pgSpins = ["10x Manual (No Turbo)", "20x Auto Normal", "30x Auto Turbo", "15x Spasi Manual", "50x Auto Turbo", "40x Manual Mix"];
+
+    // Generator Angka Acak Konsisten Berdasarkan Hari (Seed Random)
+    // Ini membuat angka acak hari ini AKAN TETAP SAMA dari pagi sampai malam, tapi BEGANTI saat besok.
+    function getSeedBasedRandom(seed) {
+        const x = Math.sin(seed) * 10000;
+        return x - Math.floor(x);
+    }
+
+    function generateDailyData() {
+        const today = new Date();
+        // Gabungan hari + bulan + tahun sebagai kode pengunci acak harian
+        const daySeed = today.getDate() + (today.getMonth() * 31) + today.getFullYear();
+
+        // 1. Generate Jam Gacor Otomatis Hari Ini
+        const pragJam1 = Math.floor(8 + getSeedBasedRandom(daySeed) * 4);
+        const pragJam2 = Math.floor(19 + getSeedBasedRandom(daySeed + 1) * 4);
+        document.getElementById('jam-pragmatic').textContent = `03:15-05:00 WIB | ${pragJam1}:20-14:45 WIB | ${pragJam2}:00-23:50 WIB`;
+
+        const pgJam1 = Math.floor(9 + getSeedBasedRandom(daySeed + 2) * 3);
+        const pgJam2 = Math.floor(22 + getSeedBasedRandom(daySeed + 3) * 2);
+        document.getElementById('jam-pgsoft').textContent = `01:00-03:00 WIB | ${pgJam1}:15-12:00 WIB | ${pgJam2}:30-01:45 WIB`;
+
+        // 2. Render List Game Pragmatic
+        renderAutoList("pragmatic-list", pragmaticGames, pragmaticSpins, daySeed, true);
+        // 3. Render List Game PG Soft
+        renderAutoList("pgsoft-list", pgGames, pgSpins, daySeed + 50, false);
+
+        // Jalankan animasi bar
+        setTimeout(() => {
+            document.querySelectorAll(".bar-fill").forEach(bar => {
+                bar.style.width = bar.getAttribute("data-target") + "%";
+            });
+        }, 200);
+    }
+
+    function renderAutoList(elementId, games, spinPool, baseSeed, isPragmatic) {
         const container = document.getElementById(elementId);
         container.innerHTML = "";
 
-        dataGacor[provider].forEach(game => {
-            const row = document.createElement("tr");
+        // Mengacak urutan game harian (Game on Fire berotasi secara otomatis)
+        let gameList = [...games].sort(() => getSeedBasedRandom(baseSeed) - 0.5);
+
+        gameList.forEach((gameName, index) => {
+            const seed = baseSeed + index;
             
+            // Mengunci nilai RTP harian otomatis MAKSIMAL 94% (Selalu under 95%)
+            // Rumus menghasilkan rentang 85% sampai 94%
+            const dailyRtp = Math.floor(85 + (getSeedBasedRandom(seed) * 10)); 
+
+            // Membuat kombinasi pola otomatis baru setiap hari
+            const step1 = spinPool[Math.floor(getSeedBasedRandom(seed + 1) * spinPool.length)];
+            const step2 = spinPool[Math.floor(getSeedBasedRandom(seed + 2) * spinPool.length)];
+            const suffix = isPragmatic ? " → Incar Buy Spin" : " → Mainkan Bet Naik-Turun";
+            const fullPola = `${step1} → ${step2}${suffix}`;
+
+            const row = document.createElement("tr");
             row.innerHTML = `
-                <td data-label="Game On Fire">
-                    <div class="game-info">
-                        <img src="${game.image}" alt="${game.name}">
-                        <div class="game-name">${game.name}</div>
-                    </div>
-                </td>
-                <td data-label="Live Bar Winrate">
+                <td><div class="game-name">${gameName}</div></td>
+                <td>
                     <div class="bar-container">
-                        <div class="bar-fill" data-target="${game.rtp}" style="width: 0%">${game.rtp}%</div>
+                        <div class="bar-fill" data-target="${dailyRtp}">${dailyRtp}%</div>
                     </div>
                 </td>
-                <td data-label="Rekomendasi Pola">
+                <td>
                     <div class="pola-wrapper">
-                        <div class="pola-text">${game.pola}</div>
-                        <button class="btn-copy" onclick="copyPattern(this, '${game.pola}')">Salin Pola</button>
+                        <div class="pola-text">${fullPola}</div>
+                        <button class="btn-copy" onclick="copyPattern(this, '${fullPola}')">Salin Pola</button>
                     </div>
                 </td>
             `;
@@ -306,7 +296,6 @@
         });
     }
 
-    // Fungsi Salin Pola Cepat
     function copyPattern(button, text) {
         navigator.clipboard.writeText(text).then(() => {
             button.textContent = "Tersalin!";
@@ -315,39 +304,12 @@
                 button.textContent = "Salin Pola";
                 button.classList.remove("copied");
             }, 1500);
-        }).catch(err => {
-            console.error('Gagal menyalin text: ', err);
         });
     }
 
-    // Inisialisasi awal dan Efek Real-Time Bar naik perlahan saat web dibuka
-    window.addEventListener("DOMContentLoaded", () => {
-        renderGames("pragmatic_play", "pragmatic-list");
-        renderGames("pg_soft", "pgsoft-list");
-
-        // Animasi pergerakan bar real-time pengisian awal
-        setTimeout(() => {
-            document.querySelectorAll(".bar-fill").forEach(bar => {
-                const target = bar.getAttribute("data-target");
-                bar.style.width = target + "%";
-            });
-        }, 300);
-
-        // Simulasi Real-Time Fluktuasi Bar Kecil secara berkala (tetap di bawah 95%)
-        setInterval(() => {
-            document.querySelectorAll(".bar-fill").forEach(bar => {
-                const baseTarget = parseInt(bar.getAttribute("data-target"));
-                // Fluktuasi acak antara -2% sampai +1% agar tetap di bawah batas aman (95%)
-                const change = Math.floor(Math.random() * 4) - 2; 
-                let newRtp = baseTarget + change;
-                if(newRtp >= 95) newRtp = 94; // Hard ceiling kunci di bawah 95%
-                if(newRtp < 80) newRtp = 82;
-                
-                bar.style.width = newRtp + "%";
-                bar.textContent = newRtp + "%";
-            });
-        }, 5000); // Berubah dinamis tiap 5 detik
-    });
+    // Jalankan sistem saat web dibuka
+    window.addEventListener("DOMContentLoaded", generateDailyData);
 </script>
+
 </body>
 </html>
