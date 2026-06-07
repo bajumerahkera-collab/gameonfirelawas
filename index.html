@@ -7,7 +7,7 @@
     <style>
         :root {
             --bg-main: #0b0f19;
-            --bg-card: #111827;
+            --bg-card: rgba(17, 24, 39, 0.85);
             --bg-inner: #1f2937;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
@@ -22,22 +22,38 @@
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-main);
             color: var(--text-main);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; 
+            pointer-events: none;
         }
 
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
+            position: relative;
+            z-index: 1; 
         }
 
         header {
-            background: linear-gradient(135deg, #111827 0%, #1e1b4b 100%);
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(30, 27, 187, 0.4) 100%);
             border: 1px solid #312e81;
             padding: 30px;
             border-radius: 12px;
             text-align: center;
             margin-bottom: 25px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px); 
         }
 
         header h1 {
@@ -73,6 +89,7 @@
             border-radius: 8px;
             margin-bottom: 15px;
             font-size: 0.95rem;
+            backdrop-filter: blur(4px);
         }
 
         .time-banner span {
@@ -88,6 +105,7 @@
             overflow: hidden;
             margin-bottom: 30px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            backdrop-filter: blur(4px);
         }
 
         .grid-table th {
@@ -207,11 +225,13 @@
 </head>
 <body>
 
+<canvas id="bg-canvas"></canvas>
+
 <div class="container">
     <header>
         <div class="live-badge">● LIVE AUTO UPDATE</div>
         <h1>Sistem Pola & Jam Gacor Harian</h1>
-        <p>Game on fire Selalu Diupdate Setiap Hari</p>
+        <p>Game on fire Selalu Update setiap hari</p>
     </header>
 
     <div class="section-title pragmatic-title">🎰 PRAGMATIC PLAY</div>
@@ -246,7 +266,7 @@
 </div>
 
 <script>
-    // 1. Kumpulan Database Game (Sudah Diperbaiki Tanda Komanya)
+    
     const pragmaticPool = [
         { name: "Gates of Olympus", img: "https://img.viva88athenae.com/pp/images/vs20olympgate.png" },
         { name: "Sweet Bonanza", img: "https://img.viva88athenae.com/pp/images/vs20fruitsw-t.png" },
@@ -284,7 +304,6 @@
     const pragmaticSpins = ["10x Manual Cepat", "20x Manual Normal", "30x Turbo (DC On)", "40x Turbo (DC Off)", "15x Auto Cepat", "50x Turbo (DC On)", "25x Fast Spin"];
     const pgSpins = ["10x Manual (No Turbo)", "20x Auto Normal", "30x Auto Turbo", "15x Spasi Manual", "50x Auto Turbo", "40x Manual Mix"];
 
-    // Fungsi Matematika Pengunci Acak Harian (Seed Random)
     function getSeedBasedRandom(seed) {
         const x = Math.sin(seed) * 10000;
         return x - Math.floor(x);
@@ -294,7 +313,6 @@
         const today = new Date();
         const daySeed = today.getDate() + ((today.getMonth() + 1) * 31) + today.getFullYear();
 
-        // 1. Acak Jam Gacor Otomatis Hari Ini
         const pragJam1 = Math.floor(8 + getSeedBasedRandom(daySeed) * 4);
         const pragJam2 = Math.floor(19 + getSeedBasedRandom(daySeed + 1) * 4);
         document.getElementById('jam-pragmatic').textContent = `03:20-05:00 WIB | ${pragJam1}:15-14:30 WIB | ${pragJam2}:00-23:45 WIB`;
@@ -303,11 +321,9 @@
         const pgJam2 = Math.floor(21 + getSeedBasedRandom(daySeed + 3) * 3);
         document.getElementById('jam-pgsoft').textContent = `02:00-04:30 WIB | ${pgJam1}:00-11:45 WIB | ${pgJam2}:15-01:00 WIB`;
 
-        // 2. Tampilkan 5 Game Acak untuk Masing-Masing Provider
         renderAutoList("pragmatic-list", pragmaticPool, pragmaticSpins, daySeed, true);
         renderAutoList("pgsoft-list", pgPool, pgSpins, daySeed + 100, false);
 
-        // Memicu efek transisi bar memanjang halus
         setTimeout(() => {
             document.querySelectorAll(".bar-fill").forEach(bar => {
                 bar.style.width = bar.getAttribute("data-target") + "%";
@@ -320,7 +336,6 @@
         if (!container) return;
         container.innerHTML = "";
 
-        // Mengacak susunan list dengan algoritma map-seed yang aman
         let gameListWithRandom = gamePool.map((game, idx) => {
             return { game: game, randomVal: getSeedBasedRandom(baseSeed + idx) };
         });
@@ -330,11 +345,8 @@
 
         dailyFiveGames.forEach((game, index) => {
             const seed = baseSeed + index + 5;
-            
-            // Kunci nilai RTP harian otomatis MAKSIMAL 94% (Selalu di bawah 95%)
             const dailyRtp = Math.floor(85 + (getSeedBasedRandom(seed) * 10)); 
 
-            // Membuat kombinasi pola otomatis baru setiap hari
             const step1 = spinPool[Math.floor(getSeedBasedRandom(seed + 12) * spinPool.length)];
             const step2 = spinPool[Math.floor(getSeedBasedRandom(seed + 24) * spinPool.length)];
             const suffix = isPragmatic ? " → Incar Buy Spin" : " → Mainkan Bet Naik-Turun";
@@ -375,7 +387,77 @@
         });
     }
 
-    window.addEventListener("DOMContentLoaded", generateDailyData);
+
+    const canvas = document.getElementById('bg-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let particles = [];
+    const colors = ['#f59e0b', '#06b6d4', '#10b981', '#4f46e5']; 
+
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 2 + 0.5; 
+            this.speedX = (Math.random() - 0.5) * 0.3; 
+            this.speedY = (Math.random() - 0.5) * 0.3;
+            this.color = colors[Math.floor(Math.random() * colors.length)];
+            this.alpha = Math.random() * 0.5 + 0.1;
+            this.fadeSpeed = Math.random() * 0.005 + 0.002;
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+
+            
+            if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        }
+
+        draw() {
+            ctx.save();
+            ctx.globalAlpha = this.alpha;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = this.color;
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+
+    function initParticles() {
+        particles = [];
+        const quantity = Math.min(60, window.innerWidth / 20);
+        for (let i = 0; i < quantity; i++) {
+            particles.push(new Particle());
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+        requestAnimationFrame(animate);
+    }
+
+    
+    window.addEventListener("DOMContentLoaded", () => {
+        generateDailyData();
+        initParticles();
+        animate();
+    });
 </script>
 </body>
 </html>
