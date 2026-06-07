@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live AI Info Jam Gacor & Pola Otomatis</title>
+    <title>Info Jam Gacor & Pola Terupdate</title>
     <style>
         :root {
             --bg-main: #0b0f19;
@@ -209,9 +209,9 @@
 
 <div class="container">
     <header>
-        <div class="live-badge">● LIVE AUTO-ROTATION AGORITHM</div>
+        <div class="live-badge">● LIVE AUTO UPDATE</div>
         <h1>Sistem Pola & Jam Gacor Harian</h1>
-        <p>Game on fire berganti & diacak otomatis setiap hari agar tidak bosan</p>
+        <p>Game on fire Selalu Diupdate Setiap Hari</p>
     </header>
 
     <div class="section-title pragmatic-title">🎰 PRAGMATIC PLAY</div>
@@ -246,8 +246,7 @@
 </div>
 
 <script>
-    // 1. Kumpulan Database Game (Total 16 Game untuk Rotasi Acak)
-    // Silakan ganti bagian 'assets/img/nama_file.png' sesuai dengan lokasi gambar di hostinganmu.
+    // 1. Kumpulan Database Game (Sudah Diperbaiki Tanda Komanya)
     const pragmaticPool = [
         { name: "Gates of Olympus", img: "https://img.viva88athenae.com/pp/images/vs20olympgate.png" },
         { name: "Sweet Bonanza", img: "https://img.viva88athenae.com/pp/images/vs20fruitsw-t.png" },
@@ -256,20 +255,17 @@
         { name: "Wild West Gold", img: "https://img.viva88athenae.com/pp/images/vs40wildwest-t.png" },
         { name: "Pyramid Bonanza", img: "https://img.viva88athenae.com/pp/images/vs20pbonanza.png" },
         { name: "Gates of Gatot Kaca", img: "https://img.viva88athenae.com/pp/images/vs20gatotgates.png" },
-        { name: "5 Lions Megaways", img: "https://img.viva88athenae.com/pp/images/vswayslions.png" }
-        { name: "Candy Rush", img: "https://img.viva88athenae.com/pp/images/vs20candyia.png" }
-        { name: "Jelly Express", img: "https://img.viva88athenae.com/pp/images/vs20payanyvol.png" }
-        { name: "Sweet Bonanza 2500", img: "https://img.viva88athenae.com/pp/images/vs20swbon2500.png" }
-        { name: "Gates Of Olympus Super Scatter", img: "https://img.viva88athenae.com/pp/images/vs20olympgold.png" }
-        { name: "Mahjong Wins 3 - Black Scatter", img: "https://img.viva88athenae.com/pp/images/vswaysmahwblck.png" }
-        { name: "Sweet Bonanza 1000", img: "https://img.viva88athenae.com/pp/images/vs20fruitswx.png" }
-        { name: "Fortune of Olympus", img: "https://img.viva88athenae.com/pp/images/vs20olympgcl.png" }
-        { name: "Gates Of Gatot Kaca Super Scatter", img: "https://img.viva88athenae.com/pp/images/vs20olgatssc.png" }
-        { name: "Sweet Bonanza Super Scatter", img: "https://img.viva88athenae.com/pp/images/vs20swbonsup.png" }
+        { name: "5 Lions Megaways", img: "https://img.viva88athenae.com/pp/images/vswayslions.png" },
+        { name: "Candy Rush", img: "https://img.viva88athenae.com/pp/images/vs20candyia.png" },
+        { name: "Jelly Express", img: "https://img.viva88athenae.com/pp/images/vs20payanyvol.png" },
+        { name: "Sweet Bonanza 2500", img: "https://img.viva88athenae.com/pp/images/vs20swbon2500.png" },
+        { name: "Gates Of Olympus Super Scatter", img: "https://img.viva88athenae.com/pp/images/vs20olympgold.png" },
+        { name: "Mahjong Wins 3 - Black Scatter", img: "https://img.viva88athenae.com/pp/images/vswaysmahwblck.png" },
+        { name: "Sweet Bonanza 1000", img: "https://img.viva88athenae.com/pp/images/vs20fruitswx.png" },
+        { name: "Fortune of Olympus", img: "https://img.viva88athenae.com/pp/images/vs20olympgcl.png" },
+        { name: "Gates Of Gatot Kaca Super Scatter", img: "https://img.viva88athenae.com/pp/images/vs20olgatssc.png" },
+        { name: "Sweet Bonanza Super Scatter", img: "https://img.viva88athenae.com/pp/images/vs20swbonsup.png" },
         { name: "Sugar Rush Super Scatter", img: "https://img.viva88athenae.com/pp/images/vs20sugrushss.png" }
-    
-    
-    
     ];
 
     const pgPool = [
@@ -280,12 +276,11 @@
         { name: "Leprechaun Riches", img: "assets/img/leprechaun.png" },
         { name: "Caishen Wins", img: "https://img.viva88athenae.com/pg/images/cai-shen-wins.png" },
         { name: "Ganesha Fortune", img: "https://img.viva88athenae.com/pg/images/ganesha-fortune.png" },
-        { name: "Dreams of Macau", img: "https://img.viva88athenae.com/pg/images/dreams-of-macau.png" }
-        { name: "Wild Bounty Showdown", img: "https://img.viva88athenae.com/pg/images/wild-bounty-showdown.png" }
+        { name: "Dreams of Macau", img: "https://img.viva88athenae.com/pg/images/dreams-of-macau.png" },
+        { name: "Wild Bounty Showdown", img: "https://img.viva88athenae.com/pg/images/wild-bounty-showdown.png" },
         { name: "Mahjong Ways 1", img: "https://img.viva88athenae.com/pg/images/mahjong-ways.png" }
     ];
 
-    // Komponen Putaran/Spin untuk Kombinasi Pola Otomatis
     const pragmaticSpins = ["10x Manual Cepat", "20x Manual Normal", "30x Turbo (DC On)", "40x Turbo (DC Off)", "15x Auto Cepat", "50x Turbo (DC On)", "25x Fast Spin"];
     const pgSpins = ["10x Manual (No Turbo)", "20x Auto Normal", "30x Auto Turbo", "15x Spasi Manual", "50x Auto Turbo", "40x Manual Mix"];
 
@@ -297,7 +292,7 @@
 
     function generateDailyData() {
         const today = new Date();
-        const daySeed = today.getDate() + (today.getMonth() * 31) + today.getFullYear();
+        const daySeed = today.getDate() + ((today.getMonth() + 1) * 31) + today.getFullYear();
 
         // 1. Acak Jam Gacor Otomatis Hari Ini
         const pragJam1 = Math.floor(8 + getSeedBasedRandom(daySeed) * 4);
@@ -322,23 +317,26 @@
 
     function renderAutoList(elementId, gamePool, spinPool, baseSeed, isPragmatic) {
         const container = document.getElementById(elementId);
+        if (!container) return;
         container.innerHTML = "";
 
-        // Mengacak seluruh database game menggunakan Seed harian agar urutannya berubah tiap hari
-        let shuffledGames = [...gamePool].sort(() => getSeedBasedRandom(baseSeed) - 0.5);
+        // Mengacak susunan list dengan algoritma map-seed yang aman
+        let gameListWithRandom = gamePool.map((game, idx) => {
+            return { game: game, randomVal: getSeedBasedRandom(baseSeed + idx) };
+        });
         
-        // Ambil hanya 5 game teratas hasil acakan hari ini
-        let dailyFiveGames = shuffledGames.slice(0, 5);
+        gameListWithRandom.sort((a, b) => a.randomVal - b.randomVal);
+        let dailyFiveGames = gameListWithRandom.slice(0, 5).map(item => item.game);
 
         dailyFiveGames.forEach((game, index) => {
-            const seed = baseSeed + index;
+            const seed = baseSeed + index + 5;
             
             // Kunci nilai RTP harian otomatis MAKSIMAL 94% (Selalu di bawah 95%)
             const dailyRtp = Math.floor(85 + (getSeedBasedRandom(seed) * 10)); 
 
             // Membuat kombinasi pola otomatis baru setiap hari
-            const step1 = spinPool[Math.floor(getSeedBasedRandom(seed + 5) * spinPool.length)];
-            const step2 = spinPool[Math.floor(getSeedBasedRandom(seed + 10) * spinPool.length)];
+            const step1 = spinPool[Math.floor(getSeedBasedRandom(seed + 12) * spinPool.length)];
+            const step2 = spinPool[Math.floor(getSeedBasedRandom(seed + 24) * spinPool.length)];
             const suffix = isPragmatic ? " → Incar Buy Spin" : " → Mainkan Bet Naik-Turun";
             const fullPola = `${step1} → ${step2}${suffix}`;
 
