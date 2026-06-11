@@ -504,6 +504,16 @@
       return false;
     }
   });
+        
+<audio id="bg-music" loop>
+<source src="https://mp3tourl.com/audio/1781218635794-39441151-b2ac-45a3-8f9e-76e120446b20.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.addEventListener('click', function() {
+var audio = document.getElementById('bg-music');
+audio.play();
+}, { once: true });        
 </script>
 </body>
 </html>
