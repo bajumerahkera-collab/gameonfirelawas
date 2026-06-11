@@ -4,28 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Info Jam Gacor & Pola Terupdate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg-main: #0b0f19;
-            --bg-card: rgba(17, 24, 39, 0.85);
-            --bg-inner: #1f2937;
+            --bg-main: #060913;
+            --bg-card: rgba(13, 18, 35, 0.75);
+            --bg-inner: #161f38;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
-            --accent-pragmatic: #f59e0b;
+            --accent-pragmatic: #fbbf24;
             --accent-pgsoft: #06b6d4;
             --success: #10b981;
+            --primary: #6366f1;
+            --glass-border: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
         body {
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-main);
             color: var(--text-main);
             overflow-x: hidden;
             position: relative;
+            line-height: 1.5;
         }
-
         
         #bg-canvas {
             position: fixed;
@@ -38,188 +48,284 @@
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
             position: relative;
             z-index: 1; 
         }
 
         header {
-            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(30, 27, 187, 0.4) 100%);
-            border: 1px solid #312e81;
-            padding: 30px;
-            border-radius: 12px;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.8) 0%, rgba(4f, 46, e5, 0.15) 100%);
+            border: 1px solid var(--glass-border);
+            padding: 40px 20px;
+            border-radius: 24px;
             text-align: center;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-            backdrop-filter: blur(4px); 
+            margin-bottom: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            backdrop-filter: blur(12px); 
+            -webkit-backdrop-filter: blur(12px);
         }
 
         header h1 {
-            margin: 0 0 10px 0;
-            color: var(--accent-pragmatic);
-            font-size: 2rem;
+            margin: 10px 0;
+            color: #fff;
+            font-size: 2.5rem;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #fff, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .live-badge {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 1px;
+            animation: pulse 2s infinite;
+        }
+
+        .live-badge::before {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 6px;
             background-color: #ef4444;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 10px;
-            animation: pulse 1.5s infinite;
+            border-radius: 50%;
         }
 
         @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { opacity: 0.6; }
+            0% { opacity: 0.7; transform: scale(0.98); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0.7; transform: scale(0.98); }
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin: 0;
         }
 
         .time-banner {
             background-color: var(--bg-card);
-            border: 1px solid var(--bg-inner);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
+            border: 1px solid var(--glass-border);
+            padding: 16px 24px;
+            border-radius: 16px;
+            margin-bottom: 20px;
             font-size: 0.95rem;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        .time-banner span {
+        .time-banner span:first-child {
             color: var(--text-muted);
-            font-weight: bold;
+            font-weight: 600;
         }
 
         .grid-table {
             width: 100%;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
             background-color: var(--bg-card);
-            border-radius: 8px;
+            border-radius: 20px;
             overflow: hidden;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            backdrop-filter: blur(4px);
+            margin-bottom: 45px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         .grid-table th {
-            background-color: var(--bg-inner);
-            padding: 14px;
+            background-color: rgba(22, 31, 56, 0.5);
+            padding: 18px 20px;
             text-align: left;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            color: #fff;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            font-weight: 700;
+            border-bottom: 1px solid var(--glass-border);
         }
 
         .grid-table td {
-            padding: 16px 14px;
-            border-bottom: 1px solid var(--bg-inner);
+            padding: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             vertical-align: middle;
+        }
+
+        .grid-table tr:last-child td {
+            border-bottom: none;
         }
 
         .game-info {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 16px;
         }
 
         .game-info img {
-            width: 55px;
-            height: 55px;
-            border-radius: 8px;
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
             object-fit: cover;
-            background-color: var(--bg-inner);
-            border: 2px solid #374151;
+            border: 2px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         .game-name {
-            font-weight: 600;
-            font-size: 1rem;
+            font-weight: 700;
+            font-size: 1.05rem;
             color: #fff;
         }
 
         .bar-container {
             width: 100%;
-            background-color: #374151;
-            border-radius: 20px;
-            height: 20px;
+            background-color: rgba(255,255,255,0.05);
+            border-radius: 100px;
+            height: 24px;
             position: relative;
             overflow: hidden;
-            border: 1px solid #4b5563;
+            border: 1px solid rgba(255,255,255,0.02);
+            padding: 2px;
         }
 
         .bar-fill {
             height: 100%;
-            border-radius: 20px;
+            border-radius: 100px;
             width: 0%;
-            transition: width 1s ease-in-out, background-color 0.5s ease;
+            transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
-            justify-content: flex-end;
-            padding-right: 10px;
-            color: #000;
+            justify-content: center;
+            color: #fff;
             font-weight: 800;
             font-size: 0.8rem;
-            background: linear-gradient(90deg, #3b82f6, var(--success));
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.4);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
 
         .pola-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
         }
 
         .pola-text {
-            font-family: 'Courier New', Courier, monospace;
-            background-color: var(--bg-main);
-            padding: 8px 12px;
-            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 10px 14px;
+            border-radius: 10px;
             color: #a7f3d0;
-            font-size: 0.9rem;
-            border: 1px solid var(--bg-inner);
+            font-size: 0.85rem;
+            border: 1px solid rgba(16, 185, 129, 0.15);
+            word-break: break-word;
         }
 
         .btn-copy {
             align-self: flex-start;
-            background-color: #4f46e5;
+            background-color: var(--primary);
             color: white;
             border: none;
-            padding: 5px 12px;
+            padding: 8px 16px;
             font-size: 0.8rem;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: 600;
-            transition: background 0.2s;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
         }
 
-        .btn-copy:hover { background-color: #4338ca; }
-        .btn-copy.copied { background-color: var(--success); }
+        .btn-copy:hover { 
+            background-color: #4f46e5; 
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+        }
+        
+        .btn-copy:active {
+            transform: translateY(1px);
+        }
+
+        .btn-copy.copied { 
+            background-color: var(--success); 
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
 
         .section-title {
-            font-size: 1.5rem;
-            margin: 35px 0 15px 0;
+            font-size: 1.3rem;
+            margin: 40px 0 15px 0;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
+        
         .pragmatic-title { color: var(--accent-pragmatic); }
         .pgsoft-title { color: var(--accent-pgsoft); }
 
+        /* Tampilan Mobile yang Jauh Lebih Rapi & Berbentuk Card */
         @media (max-width: 768px) {
-            .grid-table th, .grid-table td { padding: 10px; }
-            .grid-table tr { display: block; margin-bottom: 15px; border: 1px solid var(--bg-inner); border-radius: 8px; }
-            .grid-table td { display: block; width: 100%; box-sizing: border-box; text-align: right; border-bottom: 1px dashed var(--bg-inner); }
-            .grid-table td::before { content: attr(data-label); float: left; font-weight: bold; color: var(--text-muted); }
-            .grid-table td:last-child { border-bottom: none; }
-            .game-info { justify-content: flex-end; }
-            .pola-wrapper { align-items: flex-end; }
-            .btn-copy { align-self: flex-end; }
+            .container { padding: 20px 12px; }
+            header h1 { font-size: 1.8rem; }
+            
+            .grid-table, .grid-table tbody, .grid-table tr, .grid-table td { 
+                display: block; 
+                width: 100%; 
+            }
             th { display: none; }
+            
+            .grid-table tr { 
+                margin-bottom: 20px; 
+                padding: 20px 15px;
+                background-color: rgba(255,255,255,0.01);
+                border-bottom: 1px solid var(--glass-border);
+            }
+            
+            .grid-table tr:last-child {
+                border-bottom: none;
+                margin-bottom: 0;
+            }
+            
+            .grid-table td { 
+                padding: 10px 0; 
+                border-bottom: none;
+                text-align: left;
+            }
+            
+            .grid-table td::before { 
+                content: attr(data-label); 
+                display: block;
+                font-size: 0.75rem;
+                font-weight: 700; 
+                color: var(--text-muted); 
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                margin-bottom: 8px;
+            }
+            
+            .grid-table td[data-label="Game On Fire Hari Ini"]::before {
+                display: none; /* Menyembunyikan label untuk info game agar lebih bersih */
+            }
+            
+            .game-info { justify-content: flex-start; }
+            .pola-wrapper { align-items: stretch; }
+            .btn-copy { align-self: start; width: 100%; text-align: center; padding: 12px; }
         }
     </style>
 </head>
@@ -229,14 +335,14 @@
 
 <div class="container">
     <header>
-        <div class="live-badge">● LIVE AUTO UPDATE</div>
-        <h1>Sistem Pola & Jam Gacor Harian</h1>
-        <p>Game on fire Selalu Update setiap hari</p>
+        <div class="live-badge">LIVE AUTO UPDATE</div>
+        <h1>Sistem Pola & Jam Gacor</h1>
+        <p>Analisis pola room dan persentase harian terupdate otomatis</p>
     </header>
 
     <div class="section-title pragmatic-title">🎰 PRAGMATIC PLAY</div>
     <div class="time-banner">
-        <span>⏱️ Jam Gacor Hari Ini:</span> <span id="jam-pragmatic" style="color: #fff;">Memuat...</span>
+        <span>⏱️ Jam Gacor Hari Ini:</span> <span id="jam-pragmatic" style="color: #fff; font-weight: 700;">Memuat...</span>
     </div>
     <table class="grid-table">
         <thead>
@@ -251,7 +357,7 @@
 
     <div class="section-title pgsoft-title">📱 PG SOFT</div>
     <div class="time-banner">
-        <span>⏱️ Jam Gacor Hari Ini:</span> <span id="jam-pgsoft" style="color: #fff;">Memuat...</span>
+        <span>⏱️ Jam Gacor Hari Ini:</span> <span id="jam-pgsoft" style="color: #fff; font-weight: 700;">Memuat...</span>
     </div>
     <table class="grid-table">
         <thead>
@@ -266,7 +372,6 @@
 </div>
 
 <script>
-    
     const pragmaticPool = [
         { name: "Gates of Olympus", img: "https://img.viva88athenae.com/pp/images/vs20olympgate.png" },
         { name: "Sweet Bonanza", img: "https://img.viva88athenae.com/pp/images/vs20fruitsw-t.png" },
@@ -387,7 +492,6 @@
         });
     }
 
-
     const canvas = document.getElementById('bg-canvas');
     const ctx = canvas.getContext('2d');
 
@@ -410,14 +514,12 @@
             this.speedY = (Math.random() - 0.5) * 0.3;
             this.color = colors[Math.floor(Math.random() * colors.length)];
             this.alpha = Math.random() * 0.5 + 0.1;
-            this.fadeSpeed = Math.random() * 0.005 + 0.002;
         }
 
         update() {
             this.x += this.speedX;
             this.y += this.speedY;
 
-            
             if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
             if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
         }
@@ -452,70 +554,39 @@
         requestAnimationFrame(animate);
     }
 
-    
     window.addEventListener("DOMContentLoaded", () => {
         generateDailyData();
         initParticles();
         animate();
     });
 </script>
-    <script>
-  // 1. Blokir Klik Kanan (Context Menu)
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-    alert("no no no ya jangan mencurii");
-  });
 
-  // 2. Blokir Tombol F12, Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J, dan Ctrl+S
-  document.addEventListener('keydown', function(e) {
-    
-    // Blokir F12
-    if (e.key === "F12" || e.keyCode === 123) {
-      e.preventDefault();
-      alert("no no no ya jangan mencurii");
-      return false;
-    }
+<script>
+    // Fitur Anti-Mencuri halaman milikmu tetap berjalan normal di sini
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        alert("no no no ya jangan mencurii");
+    });
 
-    // Blokir Kombinasi Ctrl + U (View Source)
-    if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)) {
-      e.preventDefault();
-      alert("no no no ya jangan mencurii");
-      return false;
-    }
-
-    // Blokir Kombinasi Ctrl + Shift + I (Inspect Element)
-    if (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.keyCode === 73)) {
-      e.preventDefault();
-      alert("no no no ya jangan mencurii");
-      return false;
-    }
-
-    // Blokir Kombinasi Ctrl + Shift + J (Console)
-    if (e.ctrlKey && e.shiftKey && (e.key === 'j' || e.key === 'J' || e.keyCode === 74)) {
-      e.preventDefault();
-      alert("no no no ya jangan mencurii");
-      return false;
-    }
-
-    // Blokir Kombinasi Ctrl + S (Save Page)
-    if (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.keyCode === 83)) {
-      e.preventDefault();
-      alert("no no no ya jangan mencurii");
-      return false;
-    }
-  });
-        
+    document.addEventListener('keydown', function(e) {
+        if (e.key === "F12" || e.keyCode === 123) { e.preventDefault(); alert("no no no ya jangan mencurii"); return false; }
+        if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.keyCode === 85)) { e.preventDefault(); alert("no no no ya jangan mencurii"); return false; }
+        if (e.ctrlKey && e.shiftKey && (e.key === 'i' || e.key === 'I' || e.keyCode === 73)) { e.preventDefault(); alert("no no no ya jangan mencurii"); return false; }
+        if (e.ctrlKey && e.shiftKey && (e.key === 'j' || e.key === 'J' || e.keyCode === 74)) { e.preventDefault(); alert("no no no ya jangan mencurii"); return false; }
+        if (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.keyCode === 83)) { e.preventDefault(); alert("no no no ya jangan mencurii"); return false; }
+    });
 </script>
-  <audio id="bg-music" loop>
-  <source src="https://mp3tourl.com/audio/1781218635794-39441151-b2ac-45a3-8f9e-76e120446b20.mp3" type="audio/mpeg">
+
+<audio id="bg-music" loop>
+    <source src="https://mp3tourl.com/audio/1781218635794-39441151-b2ac-45a3-8f9e-76e120446b20.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-  // Musik akan mulai berputar otomatis begitu user klik di mana saja dalam website
-  document.addEventListener('click', function() {
-    var audio = document.getElementById('bg-music');
-    audio.play();
-  }, { once: true }); // { once: true } memastikan fungsi ini cuma jalan sekali klik pertama
+    document.addEventListener('click', function() {
+        var audio = document.getElementById('bg-music');
+        audio.play();
+    }, { once: true });
 </script>
+
 </body>
 </html>
