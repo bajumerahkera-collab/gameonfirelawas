@@ -505,15 +505,17 @@
     }
   });
         
-<audio id="bg-music" loop>
-<source src="https://mp3tourl.com/audio/1781218635794-39441151-b2ac-45a3-8f9e-76e120446b20.mp3" type="audio/mpeg">
+</script>
+  <audio id="bg-music" loop>
+  <source src="https://mp3tourl.com/audio/1781218635794-39441151-b2ac-45a3-8f9e-76e120446b20.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-document.addEventListener('click', function() {
-var audio = document.getElementById('bg-music');
-audio.play();
-}, { once: true });        
+  // Musik akan mulai berputar otomatis begitu user klik di mana saja dalam website
+  document.addEventListener('click', function() {
+    var audio = document.getElementById('bg-music');
+    audio.play();
+  }, { once: true }); // { once: true } memastikan fungsi ini cuma jalan sekali klik pertama
 </script>
 </body>
 </html>
